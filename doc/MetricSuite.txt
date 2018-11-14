@@ -1,0 +1,168 @@
+================================================================================
+================================================================================
+Chidamber & Kemerer Metric Suite (CK)
+================================================================================
+================================================================================
+Weighted Methods Per Class (WMC)
+Description: The number of methods defined in class.
+
+Depth of Inheritance Tree (DIT)
+Description: The maximum inheritance path from the class to the root class.
+
+Number of Children (NOC)
+Description: The number of immediate sub-classes of a class.
+
+Coupling between Object Classes (CBO)
+Description: The number of classes to which a class is coupled.
+
+Response for a Class (RFC)
+Description: The number of methods in the class (not including inherited methods) 
+plus the number of distinct method calls made by the methods in the class (counted 
+only once)
+================================================================================
+
+================================================================================
+Object-Oriented Metric Suite (OO)
+================================================================================
+================================================================================
+
+================================Coupling Metrics================================ 
+FanIn
+Description: The number of other classes that reference the class.
+
+FanOut
+Description: The number of other classes referenced by the class.
+================================================================================
+
+================================Size Metrics====================================
+Lines of Code (LOC)
+Description: The number of lines of code of a given class.
+
+Number of Declared Attributes (NODA)
+Description: The number of declared attributes in a given class.
+
+Number of Public Attributes (NOPA)
+Description: The number of public attributes in a given class.
+
+Number of Private Attributes (NOPRA)
+Description: The number of private attributes in a given class.
+
+Number of Declared Methods (NODM)
+Description: The number of declared methods of a given class.
+
+Number of Public Methods (NOPM)
+Description: The number of public methods of by a given class.
+    
+Number of Private Methods (NOPRM)
+Description: The number of private methods of by a given class.
+================================================================================
+
+================================================================================
+Exception Handling Metric Suite (EH)
+================================================================================
+================================================================================
+
+================================Coupling Metrics================================ 
+Raising Coupling (RCo)
+Description: The number of different exception types raised by all methods of a 
+given class.
+
+Signaling Coupling (SCo)
+Description: The number of different exception types signaled by all methods of 
+a given class.
+
+Handling Coupling (HCo)
+Description: The number of different exception types signaled by all methods of 
+a given class.
+================================================================================
+
+================================Size Metrics====================================
+Number of Raising (NoR)
+Description: The number of exception raised by a given class.
+
+Number of Signaling (NoS)
+Description: The number of exception signaled by a given class.
+
+Number of Handling (NoH)
+Description: The number of exception handled by a given class.
+
+Catch Block Lines of Code (CLoC)
+Description: The sum of all catch blocks lines of code of given class. 
+
+Try Block Lines of Code (TLoC)
+Description: The sum of all try blocks lines of code of given class.
+
+Finally Block Lines of Code (FLoC)
+Description: The sum of all finally blocks lines of code of given class.
+
+================================================================================
+
+===============================Anti-Patterns Metrics============================
+Number of Empty Handlers (NoEH)
+Description: The number of empty handlers (i.e., catch blocs) in a given class.
+
+Number of General Handlers (NoGH)
+Description: The number of general handlers in a given class (i.e., the catch 
+blocks that catches java.lang.Exception or java.lang.Throwable).
+
+Number of Destructive Wrapping (NoDW)
+Description: The number of destructive wrappings (i.e., exception wrappings that 
+destroys the stack trace of the original exception) in a given class.
+================================================================================
+
+================================Ratio Metrics===================================
+Number of Raising Per Method (NoRPerMethod)
+Description: The number of exceptions raised by a given class divided by a number
+of methods of this class.
+
+Number of Signaling Per Method (NoSPerMethod)
+Description: The number of exceptions signaled by a given class divided by a number
+of methods of this class.
+
+Number of Handling Per Method (NoHPerMethod)
+Description: The number of exceptions handled by a given class divided by a number
+of methods of this class.
+
+Catch Block Lines of Code Per Catch Block (CLoCPerCatch)
+Description: The ratio of catch block lines  of code per catch blocks in a given 
+class.
+
+Try Block Lines of Code Per Try Block (TLoCPerTry)
+Description: The ratio of try block lines of code per try blocks in a given class.
+
+Finally Block Lines of Code Per Finally Block (FLoCPerFinnaly)
+Description: The ratio of finally block lines per finally blocks in a given class.
+
+Ratio of Catch Block Lines of Code (RoCLoC)
+Description: The sum of all catch blocks lines of code of given class divided by
+the number of line of codes of this class. 
+
+Ratio of Try Block Lines of Code (RoTLoC)
+Description: The sum of all try blocks lines of code of given class divided by
+the number of line of codes of this class.
+
+Ratio of Finally Block Lines of Code (RoFLoC)
+Description: The sum of all finally blocks lines of code of given class divided 
+by the number of line of codes of this class.
+================================================================================
+
+================================Concern Metrics=================================
+Handling Density of Scattering (HDoS)
+Description: The density of scattering of handling code across methods of a given 
+class. This metric is calculated using a formula proposed by [1].
+================================================================================
+
+================================Usage Metrics===================================
+Exception Declaration (ED)
+Description: This metric turns 1 if a given class is an declared exception 
+(i.e., inherits from java.lang.Exception or java.lang.Throwable) or 0 otherwise.
+
+Exception Handling Mechanism Usage (EHMU)
+Description: This metric turns 1 if a given class uses an exception handling 
+construct or 0 otherwise.
+================================================================================
+
+
+[1] Marc Eaddy, Thomas Zimmermann, Kaitlin D. Sherwood, Vibhav Garg, Gail C. 
+Murphy, Nachiappan Nagappan, and Alfred V. Aho. 2008. Do Crosscutting Concerns 
+Cause Defects?. IEEE Trans. Softw. Eng. 34, 4 (July 2008), 497-515.

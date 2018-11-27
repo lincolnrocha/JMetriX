@@ -322,7 +322,7 @@ public class RFCExtractorTest {
 			if(suite.getClassQualifiedName().equals("banksys.persistence.exception.AccountDeletionException")) {
 				for(Measure measure : suite.getMeasures()) {
 					if(measure.getMetric() == Metric.RFC) {
-						assertEquals(1.0, measure.getValue(), 0.001);
+						assertEquals(0.0, measure.getValue(), 0.001);
 					}
 				}
 			}
@@ -337,7 +337,7 @@ public class RFCExtractorTest {
 			if(suite.getClassQualifiedName().equals("banksys.persistence.exception.AccountNotFoundException")) {
 				for(Measure measure : suite.getMeasures()) {
 					if(measure.getMetric() == Metric.RFC) {
-						assertEquals(1.0, measure.getValue(), 0.001);
+						assertEquals(0.0, measure.getValue(), 0.001);
 					}
 				}
 			}
@@ -387,7 +387,7 @@ public class RFCExtractorTest {
 			if(suite.getClassQualifiedName().equals("banksys.persistence.exception.PersistenceException")) {
 				for(Measure measure : suite.getMeasures()) {
 					if(measure.getMetric() == Metric.RFC) {
-						assertEquals(1.0, measure.getValue(), 0.001);
+						assertEquals(2.0, measure.getValue(), 0.001);
 					}
 				}
 			}

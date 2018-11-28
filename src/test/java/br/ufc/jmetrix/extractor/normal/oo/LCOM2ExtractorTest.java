@@ -3,6 +3,7 @@ package br.ufc.jmetrix.extractor.normal.oo;
 import static org.junit.Assert.*;
 
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import br.ufc.jmetrix.model.Dataset;
@@ -26,264 +27,126 @@ public class LCOM2ExtractorTest {
 		
 		spoonAPI.process();
 	}
-
-	@Test
-	public void testAbstractAccount() {
+	
+	@Ignore
+	public void test(String classQualifiedName, Metric metric, double expected, double delta) {
+		boolean classFound = false, metricFound = false;
+		
 		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.account.AbstractAccount")) {
+			if(suite.getClassQualifiedName().equals(classQualifiedName)) {
+				classFound = true;
+				
 				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.LCOM2) {
-						assertEquals((1.0 - 3.0 / (4.0 * 2.0)), measure.getValue(), 0.001);
+					if(measure.getMetric() == metric) {
+						metricFound = true;
+						
+						assertEquals(expected, measure.getValue(), delta);
 					}
+				}
+				
+				if(!metricFound) {
+					fail("A classe '" + classQualifiedName + "' não pôde ser avaliada na métrica '" + metric + "'.");
 				}
 			}
 		}
+		
+		if(!classFound) {
+			fail("Não foi possível encontrar a classe '" + classQualifiedName + "'.");
+		}
+}
+	
+	@Test
+	public void testAbstractAccount() {
+		test("banksys.account.AbstractAccount", Metric.LCOM2, 1.0 - 3.0 / (4.0 * 2.0), 0.001);
 	}
 	
 	@Test
 	public void testOrdinaryAccount() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.account.OrdinaryAccount")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.LCOM2) {
-						assertEquals(1.0, measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.account.OrdinaryAccount", Metric.LCOM2, 1.0, 0.001);
 	}
 	
 	@Test
 	public void testSavingsAccount() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.account.SavingsAccount")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.LCOM2) {
-						assertEquals(1.0, measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.account.SavingsAccount", Metric.LCOM2, 1.0, 0.001);
 	}
 	
 	@Test
 	public void testSpecialAccount() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.account.SpecialAccount")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.LCOM2) {
-						assertEquals((1.0 - 3.0 / (3.0 * 1.0)), measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.account.SpecialAccount", Metric.LCOM2, 1.0 - 3.0 / (3.0 * 1.0), 0.001);
 	}
 	
 	@Test
 	public void testTaxAccount() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.account.TaxAccount")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.LCOM2) {
-						assertEquals(1.0, measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.account.TaxAccount", Metric.LCOM2, 1.0, 0.001);
 	}
 	
 	@Test
 	public void testInsufficientFundsException() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.account.exception.InsufficientFundsException")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.LCOM2) {
-						assertEquals((1.0 - 4.0 / (3.0 * 3.0)), measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.account.exception.InsufficientFundsException", Metric.LCOM2, 1.0 - 4.0 / (3.0 * 3.0), 0.001);
 	}
-	
+
 	@Test
 	public void testNegativeAmountException() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.account.exception.NegativeAmountException")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.LCOM2) {
-						assertEquals((1.0 - 2.0 / (2.0 * 2.0)), measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.account.exception.NegativeAmountException", Metric.LCOM2, 1.0 - 2.0 / (2.0 * 2.0), 0.001);
 	}
 	
 	@Test
 	public void testBankController() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.control.BankController")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.LCOM2) {
-						assertEquals((1.0 - 9.0 / (9.0 * 1.0)), measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.control.BankController", Metric.LCOM2, 1.0 - 9.0 / (9.0 * 1.0), 0.001);
 	}
 	
 	@Test
 	public void testBankTransactionException() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.control.exception.BankTransactionException")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.LCOM2) {
-						assertEquals((1.0 - 3.0 / (2.0 * 3.0)), measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.control.exception.BankTransactionException", Metric.LCOM2, 1.0 - 3.0 / (2.0 * 3.0), 0.001);
 	}
 	
 	@Test
 	public void testIncompatibleAccountException() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.control.exception.IncompatibleAccountException")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.LCOM2) {
-						assertEquals(1.0, measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.control.exception.IncompatibleAccountException", Metric.LCOM2, 1.0, 0.001);
 	}
 	
 	@Test
 	public void testAccountVector() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.persistence.AccountVector")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.LCOM2) {
-						assertEquals((1.0 - 5.0 / (7.0 * 1.0)), measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.persistence.AccountVector", Metric.LCOM2, 1.0 - 5.0 / (7.0 * 1.0), 0.001);
 	}
 	
 	@Test
 	public void testAccountXStream() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.persistence.AccountXStream")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.LCOM2) {
-						assertEquals((1.0 - 9.0 / (9.0 * 2.0)), measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
-	}
-	
-	@Test
-	public void testIAccountRepository() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.persistence.IAccountRepository")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.LCOM2) {
-						assertEquals(1.0, measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.persistence.AccountXStream", Metric.LCOM2, 1.0 - 9.0 / (9.0 * 2.0), 0.001);
 	}
 	
 	@Test
 	public void testAccountCreationException() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.persistence.exception.AccountCreationException")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.LCOM2) {
-						assertEquals(1.0, measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.persistence.exception.AccountCreationException", Metric.LCOM2, 1.0, 0.001);
 	}
 	
 	@Test
 	public void testAccountDeletionException() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.persistence.exception.AccountDeletionException")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.LCOM2) {
-						assertEquals(1.0, measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.persistence.exception.AccountDeletionException", Metric.LCOM2, 1.0, 0.001);
 	}
 	
 	@Test
 	public void testAccountNotFoundException() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.persistence.exception.AccountNotFoundException")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.LCOM2) {
-						assertEquals(1.0, measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.persistence.exception.AccountNotFoundException", Metric.LCOM2, 1.0, 0.001);
 	}
 	
 	@Test
 	public void testExistingAccountException() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.persistence.exception.ExistingAccountException")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.LCOM2) {
-						assertEquals((1.0 - 2.0 / (2.0 * 2.0)), measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.persistence.exception.ExistingAccountException", Metric.LCOM2, 1.0 - 2.0 / (2.0 * 2.0), 0.001);
 	}
-	
+
 	@Test
 	public void testFlushException() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.persistence.exception.FlushException")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.LCOM2) {
-						assertEquals(1.0, measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.persistence.exception.FlushException", Metric.LCOM2, 1.0, 0.001);
 	}
 	
 	@Test
 	public void testPersistenceException() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.persistence.exception.PersistenceException")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.LCOM2) {
-						assertEquals((1.0 - 3.0 / (2.0 * 3.0)), measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.persistence.exception.PersistenceException", Metric.LCOM2, 1.0 - 3.0 / (2.0 * 3.0), 0.001);
 	}
 	
 	@Test
 	public void testATM24H() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.view.ATM24H")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.LCOM2) {
-						assertEquals((1.0 - 3.0 / (3.0 * 1.0)), measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.view.ATM24H", Metric.LCOM2, 1.0 - 3.0 / (3.0 * 1.0), 0.001);
 	}
 }

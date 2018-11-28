@@ -1,0 +1,12 @@
+# target programming language
+language: java
+
+# JDK versios support
+jdk:
+  - oraclejdk8
+
+# run tests, findbugs, pmd and friends using Ant, Maven or Gradle
+script: 
+  - mvn clean package
+  - mvn test
+  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V

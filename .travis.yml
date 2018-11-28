@@ -5,6 +5,11 @@ language: java
 jdk:
   - oraclejdk8
 
+branches:
+  only:
+    - master
+    - develop
+    
 # run tests, findbugs, pmd and friends using Ant, Maven or Gradle
 script: 
   - mvn clean package

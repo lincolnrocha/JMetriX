@@ -3,6 +3,7 @@ package br.ufc.jmetrix.extractor.normal.ck;
 import static org.junit.Assert.*;
 
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import br.ufc.jmetrix.model.Dataset;
@@ -26,6 +27,33 @@ public class RFCExtractorTest {
 		
 		spoonAPI.process();
 	}
+	
+	@Ignore
+	public void test(String classQualifiedName, Metric metric, double expected, double delta) {
+		boolean classFound = false, metricFound = false;
+		
+		for(Suite suite : Dataset.list()) {
+			if(suite.getClassQualifiedName().equals(classQualifiedName)) {
+				classFound = true;
+				
+				for(Measure measure : suite.getMeasures()) {
+					if(measure.getMetric() == metric) {
+						metricFound = true;
+						
+						assertEquals(expected, measure.getValue(), delta);
+					}
+				}
+				
+				if(!metricFound) {
+					fail("A classe '" + classQualifiedName + "' não pôde ser avaliada na métrica '" + metric + "'.");
+				}
+			}
+		}
+		
+		if(!classFound) {
+			fail("Não foi possível encontrar a classe '" + classQualifiedName + "'.");
+		}
+	}
 
 	/* Métodos nessa classe:
 	 *   AbstractAccount.credit(double);
@@ -35,15 +63,7 @@ public class RFCExtractorTest {
 	 */
 	@Test
 	public void testAbstractAccount() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.account.AbstractAccount")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.RFC) {
-						assertEquals(4.0, measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.account.AbstractAccount", Metric.RFC, 4.0, 0.001);
 	}
 	
 	/* Métodos nessa classe:
@@ -51,15 +71,7 @@ public class RFCExtractorTest {
 	 */
 	@Test
 	public void testOrdinaryAccount() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.account.OrdinaryAccount")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.RFC) {
-						assertEquals(1.0, measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.account.OrdinaryAccount", Metric.RFC, 1.0, 0.001);
 	}
 	
 	/* Métodos nessa classe:
@@ -69,15 +81,7 @@ public class RFCExtractorTest {
 	 */
 	@Test
 	public void testSavingsAccount() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.account.SavingsAccount")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.RFC) {
-						assertEquals(3.0, measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.account.SavingsAccount", Metric.RFC, 3.0, 0.001);
 	}
 	
 	/* Métodos nessa classe:
@@ -88,15 +92,7 @@ public class RFCExtractorTest {
 	 */
 	@Test
 	public void testSpecialAccount() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.account.SpecialAccount")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.RFC) {
-						assertEquals(4.0, measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.account.SpecialAccount", Metric.RFC, 4.0, 0.001);
 	}
 	
 	/* Métodos nessa classe:
@@ -104,15 +100,7 @@ public class RFCExtractorTest {
 	 */
 	@Test
 	public void testTaxAccount() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.account.TaxAccount")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.RFC) {
-						assertEquals(1.0, measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.account.TaxAccount", Metric.RFC, 1.0, 0.001);
 	}
 	
 	/* Métodos nessa classe:
@@ -122,15 +110,7 @@ public class RFCExtractorTest {
 	 */
 	@Test
 	public void testInsufficientFundsException() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.account.exception.InsufficientFundsException")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.RFC) {
-						assertEquals(3.0, measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.account.exception.InsufficientFundsException", Metric.RFC, 3.0, 0.001);
 	}
 	
 	/* Métodos nessa classe:
@@ -139,15 +119,7 @@ public class RFCExtractorTest {
 	 */
 	@Test
 	public void testNegativeAmountException() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.account.exception.NegativeAmountException")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.RFC) {
-						assertEquals(2.0, measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.account.exception.NegativeAmountException", Metric.RFC, 2.0, 0.001);
 	}
 	
 	/* Métodos nessa classe:
@@ -172,15 +144,7 @@ public class RFCExtractorTest {
 	 */
 	@Test
 	public void testBankController() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.control.BankController")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.RFC) {
-						assertEquals(18.0, measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.control.BankController", Metric.RFC, 18.0, 0.001);
 	}
 	
 	/* Métodos nessa classe:
@@ -190,30 +154,14 @@ public class RFCExtractorTest {
 	 */
 	@Test
 	public void testBankTransactionException() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.control.exception.BankTransactionException")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.RFC) {
-						assertEquals(3.0, measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.control.exception.BankTransactionException", Metric.RFC, 3.0, 0.001);
 	}
 	
 	/* Métodos nessa classe:
 	 */
 	@Test
 	public void testIncompatibleAccountException() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.control.exception.IncompatibleAccountException")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.RFC) {
-						assertEquals(0.0, measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.control.exception.IncompatibleAccountException", Metric.RFC, 0.0, 0.001);
 	}
 	
 	/* Métodos nessa classe:
@@ -233,15 +181,7 @@ public class RFCExtractorTest {
 	 */
 	@Test
 	public void testAccountVector() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.persistence.AccountVector")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.RFC) {
-						assertEquals(13.0, measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.persistence.AccountVector", Metric.RFC, 13.0, 0.001);
 	}
 	
 	/* Métodos nessa classe:
@@ -267,81 +207,28 @@ public class RFCExtractorTest {
 	 */
 	@Test
 	public void testAccountXStream() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.persistence.AccountXStream")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.RFC) {
-						assertEquals(19.0, measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
-	}
-	
-	/* Métodos nessa classe:
-	 *   IAccountRepository.create(AbstractAccount);
-	 *   IAccountRepository.delete(String);
-	 *   IAccountRepository.retrieve(String);
-	 *   IAccountRepository.list();
-	 *   IAccountRepository.mumberOfAccounts();
-	 *   IAccountRepository.flush();
-	 */
-	@Test
-	public void testIAccountRepository() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.persistence.IAccountRepository")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.RFC) {
-						assertEquals(6.0, measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.persistence.AccountXStream", Metric.RFC, 19.0, 0.001);
 	}
 	
 	/* Métodos nessa classe:
 	 */
 	@Test
 	public void testAccountCreationException() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.persistence.exception.AccountCreationException")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.RFC) {
-						assertEquals(0.0, measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.persistence.exception.AccountCreationException", Metric.RFC, 0.0, 0.001);
 	}
 	
 	/* Métodos nessa classe:
 	 */
 	@Test
 	public void testAccountDeletionException() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.persistence.exception.AccountDeletionException")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.RFC) {
-						assertEquals(0.0, measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.persistence.exception.AccountDeletionException", Metric.RFC, 0.0, 0.001);
 	}
 	
 	/* Métodos nessa classe:
 	 */
 	@Test
 	public void testAccountNotFoundException() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.persistence.exception.AccountNotFoundException")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.RFC) {
-						assertEquals(0.0, measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.persistence.exception.AccountNotFoundException", Metric.RFC, 0.0, 0.001);
 	}
 	
 	/* Métodos nessa classe:
@@ -350,15 +237,7 @@ public class RFCExtractorTest {
 	 */
 	@Test
 	public void testExistingAccountException() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.persistence.exception.ExistingAccountException")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.RFC) {
-						assertEquals(2.0, measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.persistence.exception.ExistingAccountException", Metric.RFC, 2.0, 0.001);
 	}
 	
 	/* Métodos nessa classe:
@@ -366,15 +245,7 @@ public class RFCExtractorTest {
 	 */
 	@Test
 	public void testFlushException() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.persistence.exception.FlushException")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.RFC) {
-						assertEquals(1.0, measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.persistence.exception.FlushException", Metric.RFC, 1.0, 0.001);
 	}
 	
 	/* Métodos nessa classe:
@@ -383,15 +254,7 @@ public class RFCExtractorTest {
 	 */
 	@Test
 	public void testPersistenceException() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.persistence.exception.PersistenceException")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.RFC) {
-						assertEquals(2.0, measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.persistence.exception.PersistenceException", Metric.RFC, 2.0, 0.001);
 	}
 	
 	/* Métodos nessa classe:
@@ -415,14 +278,6 @@ public class RFCExtractorTest {
 	 */
 	@Test
 	public void testATM24H() {
-		for(Suite suite : Dataset.list()) {
-			if(suite.getClassQualifiedName().equals("banksys.view.ATM24H")) {
-				for(Measure measure : suite.getMeasures()) {
-					if(measure.getMetric() == Metric.RFC) {
-						assertEquals(17.0, measure.getValue(), 0.001);
-					}
-				}
-			}
-		}
+		test("banksys.view.ATM24H", Metric.RFC, 17.0, 0.001);
 	}
 }

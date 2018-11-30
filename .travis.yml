@@ -23,5 +23,6 @@ script:
 # notifications
 notifications:
   webhooks: https://fathomless-fjord-24024.herokuapp.com/notify
-  on_success: always
+  on_success: always 
   on_failure: always
+  on_error: always

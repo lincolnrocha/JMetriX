@@ -11,7 +11,7 @@ branches:
     - develop
 
 #clone project for tests
-after_script:
+before_script:
   - git clone https://github.com/lincolnrocha/bank-sys.git
 
 # run tests, findbugs, pmd and friends using Ant, Maven or Gradle

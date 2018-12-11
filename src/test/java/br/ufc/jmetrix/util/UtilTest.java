@@ -37,4 +37,8 @@ public class UtilTest {
 		}
 	}
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> feature/NoPAExtractorTest

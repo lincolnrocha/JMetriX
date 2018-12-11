@@ -17,7 +17,7 @@ public class NoPAExtractorTest {
 	{
 		SpoonAPI spoon = new Launcher();
 		
-		spoon.addInputResource("../JMetriX/src/test/java/br/ufc/jmetrix/bank-sys/src/main/");
+		spoon.addInputResource("../home/travis/build/lincolnrocha/bank-sys/src/main/");
 		spoon.getEnvironment().setNoClasspath(true);
 		spoon.buildModel();
 		spoon.addProcessor("br.ufc.jmetrix.extractor.normal.oo.NoPAExtractor");

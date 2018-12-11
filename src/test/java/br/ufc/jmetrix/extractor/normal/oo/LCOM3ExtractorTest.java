@@ -17,7 +17,7 @@ public class LCOM3ExtractorTest {
 	{
 		SpoonAPI spoon = new Launcher();
 		
-		spoon.addInputResource("../home/travis/build/lincolnrocha/bank-sys/src/main/");
+		spoon.addInputResource("../bank-sys/src/main/");
 		spoon.getEnvironment().setNoClasspath(true);
 		spoon.buildModel();
 		spoon.addProcessor("br.ufc.jmetrix.extractor.normal.oo.LCOM3Extractor");

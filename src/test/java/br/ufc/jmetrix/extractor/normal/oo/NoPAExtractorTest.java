@@ -69,6 +69,13 @@ public class NoPAExtractorTest {
 	}
 	
 	@Test
+	public void testProcessNegativeAmountException() 
+	{
+		
+		UtilTest.test("banksys.account.exception.NegativeAmountException", Metric.NoPA, 0.0, 0.0001);
+	}
+	
+	@Test
 	public void testProcessBankController() 
 	{
 		

@@ -12,7 +12,9 @@ branches:
 
 #clone project for tests
 before_script:
+  - cd ..
   - git clone https://github.com/lincolnrocha/bank-sys.git
+  - cd JMetriX
 
 # run tests, findbugs, pmd and friends using Ant, Maven or Gradle
 script: 

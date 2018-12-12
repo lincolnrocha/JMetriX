@@ -14,7 +14,7 @@ public class NoAExtractor extends AbstractProcessor<CtClass<?>> {
 
 		if (Util.isValid(element)) {
 			String qualifiedName = element.getQualifiedName();
-			double numberOfAttributes = element.getAllFields().size();
+			double numberOfAttributes = element.getDeclaredFields().size();
 			Dataset.store(qualifiedName, new Measure(Metric.NoA, numberOfAttributes));
 		}
 	}

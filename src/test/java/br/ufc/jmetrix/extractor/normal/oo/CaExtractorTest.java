@@ -19,7 +19,7 @@ public class CaExtractorTest {
 	{
 		SpoonAPI spoon = new Launcher();
 		
-		spoon.addInputResource("C://Users/gabrielsfirmino/Desktop/bank-sys-master/src/main/");
+		spoon.addInputResource("../bank-sys/src/main/");
 		spoon.getEnvironment().setNoClasspath(true);
 		spoon.buildModel();
 		spoon.addProcessor("br.ufc.jmetrix.extractor.normal.oo.CaExtractor");
